@@ -51,14 +51,13 @@ public class simulation {
             row[8] = Integer.toString(idle);
             data.add(row);
 
-            // Average Calculations
-              //to do
-            
-
         } while(option.equals("A") && customerNum == stoppingCriteria || option.equals("B") && serviceEnds >= stoppingCriteria);
 
         // Prints Table
         stringPrinter(data);
+       
+       // Average Calculations
+            //to do
 
         // Print summary
         averagePrinter(averageValues);
