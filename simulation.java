@@ -16,15 +16,16 @@ public class FilesTest {
    private static void calculate(int stoppingCriteria, String option){
     ArrayList<String[]> data = new ArrayList<String[]>(); // Stores per row
     do {
-        int[] averageValues = new int[7]; // Stores the average value. Follow the arrangement on the specifications 1-7.
         int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0; 
+        int[] averageValues = new int[7]; // Stores the average value. Follow the arrangement on the specifications 1-7.
         data.clear(); // resets the data
 
         String[] row = new String[9];
 
         // Calculation area
-        customerNum++;
         do{
+            customerNum++;
+           
             // Per row calculations 
             if(customerNum == 1) {
                 Interarrival = 0;
