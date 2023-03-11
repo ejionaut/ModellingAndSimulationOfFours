@@ -55,7 +55,7 @@ public class simulation {
               //to do
             
 
-        } while(option.equals("A") && customerNum == stoppingCriteria || option.equals("B") && serviceEnds == stoppingCriteria);
+        } while(option.equals("A") && customerNum == stoppingCriteria || option.equals("B") && serviceEnds >= stoppingCriteria);
 
         // Prints Table
         stringPrinter(data);
