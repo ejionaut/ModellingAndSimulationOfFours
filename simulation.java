@@ -36,6 +36,7 @@ public class FilesTest {
 
             service = serviceTimeCompare();
             // Service begins, Waiting time, Service Ends, Customer Time, Idle
+               //todo
 
             // Setting of Values;
             row[0] = Integer.toString(customerNum);
@@ -50,7 +51,8 @@ public class FilesTest {
             data.add(row);
 
             // Average Calculations
-            averagePrinter(averageValues);
+              //to do
+            
 
         } while(option.equals("A") && customerNum == stoppingCriteria || option.equals("B") && serviceEnds == stoppingCriteria);
 
@@ -58,7 +60,7 @@ public class FilesTest {
         stringPrinter(data);
 
         // Print summary
-            //To do
+        averagePrinter(averageValues);
     } while (createAnother());
    }
 
