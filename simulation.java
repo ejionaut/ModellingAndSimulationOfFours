@@ -146,7 +146,7 @@ public class simulation {
                 sT = data.get(x)[3], tSB = data.get(x)[4], wT = data.get(x)[5],
                 tSE = data.get(x)[6], tCSS = data.get(x)[7], iTS = data.get(x)[8];
 
-        System.out.printf("%10s %20s %15s %15s %21s %14s %20s %35s %15s",cN,iT,aT,sT,tSB,wT,tSE,tCSS,iTS);
+        System.out.printf("\n%6s %18s %18s %15s %18s %16s %18s %28s %26s",cN,iT,aT,sT,tSB,wT,tSE,tCSS,iTS);
     }
 
     buffer();
