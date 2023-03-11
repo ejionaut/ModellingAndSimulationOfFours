@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 
-public class simulation {
+public class FilesTest {
    static Scanner src = new Scanner(System.in);
    static Random rand = new Random();
    public static void main(String[] args) {
@@ -14,15 +14,18 @@ public class simulation {
    // Calculations
 
    private static void calculate(int stoppingCriteria, String option){
-    ArrayList<String[]> data = new ArrayList<String[]>();
-    int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0; 
+    ArrayList<String[]> data = new ArrayList<String[]>(); // Stores per row
     do {
+        int[] averageValues = new int[7]; // Stores the average value. Follow the arrangement on the specifications 1-7.
+        int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0; 
+        data.clear(); // resets the data
+
         String[] row = new String[9];
 
         // Calculation area
         customerNum++;
         do{
-            
+            // Per row calculations 
             if(customerNum == 1) {
                 Interarrival = 0;
                 arrival = 0;
@@ -45,6 +48,9 @@ public class simulation {
             row[7] = Integer.toString(customerTime);
             row[8] = Integer.toString(idle);
             data.add(row);
+
+            // Average Calculations
+            averagePrinter(averageValues);
 
         } while(option.equals("A") && customerNum == stoppingCriteria || option.equals("B") && serviceEnds == stoppingCriteria);
 
@@ -149,6 +155,17 @@ public class simulation {
         System.out.printf("\n%6s %18s %18s %15s %18s %16s %18s %28s %26s",cN,iT,aT,sT,tSB,wT,tSE,tCSS,iTS);
     }
 
+    buffer();
+   }
+
+   private static void averagePrinter(int[] data){
+    System.out.println("\nAverage Waiting time for customer : " + data[0] +
+                       "\nThe probability that a customer has to wait in the queue : " + data[1] +
+                       "\nThe proportion of idle time of the server : " + data[2] +
+                       "\nThe average service time : " + data[3] +
+                       "\nAverage time between arrivals : " + data[4] +
+                       "\nThe average waiting time for those who wait in queue : " + data[5] +
+                       "\nThe average time a customer spends in the system : " + data[6]);
     buffer();
    }
 
