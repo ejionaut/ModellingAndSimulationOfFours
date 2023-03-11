@@ -13,7 +13,7 @@ public class simulation {
 
    // Calculations
 
-   public static void calculate(int stoppingCriteria, String option){
+   private static void calculate(int stoppingCriteria, String option){
     ArrayList<String[]> data = new ArrayList<String[]>();
     int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0; 
     do {
@@ -57,7 +57,7 @@ public class simulation {
    }
 
      // Comparing Values
-     public static Integer serviceTimeCompare(){
+     private static Integer serviceTimeCompare(){
         int serviceTime = rand.nextInt(100);
         // Todo
         return serviceTime;
@@ -89,7 +89,7 @@ public class simulation {
 
    // User Choices
 
-   public static void terminationOption() {
+   private static void terminationOption() {
        System.out.println("Choose an Option: " + 
                                 "\n\tA: Customer Based "+
                                 "\n\tB: Number of Minutes ");
@@ -122,7 +122,7 @@ public class simulation {
        }
    }
 
-   public static Boolean createAnother(){
+   private static Boolean createAnother(){
     System.out.println("Do you want to create another simulation? ");
     String choice = src.nextLine();
 
@@ -135,7 +135,7 @@ public class simulation {
 
    // Printers
 
-   public static void stringPrinter(ArrayList<String[]> data){
+   private static void stringPrinter(ArrayList<String[]> data){
     System.out.printf("%10s %20s %15s %15s %21s %14s %20s %35s %15s","Customer No.", "Interarrival Time",
             "Arrival Time", "Service Time","Time Service Begins","Waiting Time",
             "Time Service Ends", "Time Customer Spends in System", "Idle Time");
@@ -152,7 +152,7 @@ public class simulation {
     buffer();
    }
 
-   public static void buffer(){
+   private static void buffer(){
        System.out.println();
        System.out.println();
    }
