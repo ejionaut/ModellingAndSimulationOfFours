@@ -74,25 +74,23 @@ public class simulation {
     private static Integer interArrivalTimeCompare(){
         int randomArrival = rand.nextInt(1000);
 
-        if( randomArrival <= 124) {
-            randomArrival = 1;
+       if( randomArrival <= 124) {
+            return 1;
         } else if ( randomArrival >= 125 && randomArrival <= 249 ) {
-            randomArrival = 2;
+            return 2;
         } else if ( randomArrival >= 250 && randomArrival <= 374 ) {
-            randomArrival = 3;
+            return 3;
         } else if ( randomArrival >= 375 && randomArrival <= 499 ) {
-            randomArrival = 4;
+            return 4;
         } else if ( randomArrival >= 500 && randomArrival <= 624 ) {
-            randomArrival = 5;
+            return 5;
         } else if ( randomArrival >= 625 && randomArrival <= 749 ) {
-            randomArrival = 6;
+            return 6;
         } else if ( randomArrival >= 750 && randomArrival <= 874 ) {
-            randomArrival = 7;
+            return 7;
         } else {
-            randomArrival = 8;
+            return 8;
         }
-
-        return randomArrival;
     }
 
    // User Choices
