@@ -70,6 +70,7 @@ public class simulation {
 
         // Print summary
         averagePrinter(averageValues);
+        noOfIterations++;
     } while (createAnother());
    }
 
