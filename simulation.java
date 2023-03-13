@@ -7,6 +7,7 @@ import java.util.Random;
 public class simulation {
    static Scanner src = new Scanner(System.in);
    static Random rand = new Random();
+   
    public static void main(String[] args) {
        terminationOption();
    }
@@ -14,7 +15,13 @@ public class simulation {
    // Calculations
 
    private static void calculate(int stoppingCriteria, String option){
+    int noOfIterations = 0;
     ArrayList<String[]> data = new ArrayList<String[]>(); // Stores per row
+      
+    if (noOfIterations > 0 ) {
+       terminationOption();
+    }
+      
     do {
         int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0; 
         int[] averageValues = new int[7]; // Stores the average value. Follow the arrangement on the specifications 1-7.
