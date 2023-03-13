@@ -56,19 +56,42 @@ public class simulation {
         // Prints Table
         stringPrinter(data);
        
-       // Average Calculations
-            //to do
+        // Average Calculations
+        //to do
+        //Average Waiting time for customer ( total time customers wait in queue (mins)/total number of customers)
+        averageValues[0] = sumThisValues(data, 5) / sumThisValues(data, 1);
 
         // Print summary
         averagePrinter(averageValues);
     } while (createAnother());
    }
 
+     // Iterator. Sums up all the values in the given column
+     private static Integer sumThisValues(ArrayList<String[]> data, int column) {
+        int sum = 0;
+
+        for (String[] strings : data) {
+            sum += Integer.valueOf(strings[column]);
+        }
+
+        return sum;
+     }
+
      // Comparing Values
      private static Integer serviceTimeCompare(){
         int serviceTime = rand.nextInt(100);
-        // Todo
-        return serviceTime;
+        
+        if(serviceTime <= 14){
+            return 1;
+        } else if (serviceTime >= 15 && serviceTime <= 44){
+            return 2;
+        } else if (serviceTime >= 45 && serviceTime <= 69){
+            return 3;
+        } else if (serviceTime >= 70 && serviceTime <= 89){
+            return 4;
+        } else {
+            return 5;
+        }
     }
     
     private static Integer interArrivalTimeCompare(){
