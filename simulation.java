@@ -40,6 +40,17 @@ public class simulation {
             service = serviceTimeCompare();
             // Service begins, Waiting time, Service Ends, Customer Time, Idle
                //todo
+            waiting = serviceBegins - arrival;
+
+            if (waiting == 0){
+                serviceBegins = arrival;
+            } else {
+                serviceBegins = Integer.valueOf(data.get(customerNum - 1)[6]);
+            }
+
+            serviceEnds = service + serviceBegins;
+            customerTime = serviceEnds - arrival;
+            idle = Integer.valueOf(data.get(customerNum - 1)[6]) - arrival;
 
             // Setting of Values;
             row[0] = Integer.toString(customerNum);
@@ -163,6 +174,7 @@ public class simulation {
     } else {
         return false;
     }
+    return null;
    }
 
    // Printers
@@ -200,4 +212,5 @@ public class simulation {
        System.out.println();
    }
 
-}
+
+} // end of class
