@@ -45,12 +45,12 @@ public class simulation {
             if (arrival < Integer.valueOf(data.get(customerNum - 1)[6])){
                 serviceBegins = Integer.valueOf(data.get(customerNum - 1)[6]);
             } else{ // add another else if, if other situation is not anticipated
-                serviceBegins = arrival; 
+                serviceBegins = Integer.valueOf(data.get(customerNum)[2]); 
             }
-            waiting = serviceBegins - arrival;
-            serviceEnds = service + serviceBegins;
-            customerTime = serviceEnds - arrival;
-            idle = Integer.valueOf(data.get(customerNum - 1)[6]) - arrival;
+            waiting = Integer.valueOf(data.get(customerNum)[4]) - Integer.valueOf(data.get(customerNum)[2]);
+            serviceEnds = Integer.valueOf(data.get(customerNum)[3]) + Integer.valueOf(data.get(customerNum)[4]);
+            customerTime = Integer.valueOf(data.get(customerNum)[6]) - Integer.valueOf(data.get(customerNum)[2]);
+            idle = Integer.valueOf(data.get(customerNum - 1)[6]) - Integer.valueOf(data.get(customerNum)[2]);
 
             // Setting of Values;
             row[0] = Integer.toString(customerNum);
