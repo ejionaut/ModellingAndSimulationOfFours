@@ -40,14 +40,14 @@ public class simulation {
             service = serviceTimeCompare();
             // Service begins, Waiting time, Service Ends, Customer Time, Idle
                //todo
-            waiting = serviceBegins - arrival;
+            
 
-            if (waiting == 0){
-                serviceBegins = arrival;
-            } else {
+            if (arrival < Integer.valueOf(data.get(customerNum - 1)[6])){
                 serviceBegins = Integer.valueOf(data.get(customerNum - 1)[6]);
+            } else{ // add another else if, if other situation is not anticipated
+                serviceBegins = arrival; 
             }
-
+            waiting = serviceBegins - arrival;
             serviceEnds = service + serviceBegins;
             customerTime = serviceEnds - arrival;
             idle = Integer.valueOf(data.get(customerNum - 1)[6]) - arrival;
