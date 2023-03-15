@@ -15,21 +15,19 @@ public class simulation {
    // Calculations
 
    private static void calculate(int stoppingCriteria, String option){
-    ArrayList<String[]> data = new ArrayList<String[]>(); // Stores per row
-    int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0, counter = 0; 
-    do {
+        ArrayList<String[]> data = new ArrayList<String[]>(); // Stores per row
+        int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0, counter = 0; 
+        
         int[] averageValues = new int[7]; // Stores the average value. Follow the arrangement on the specifications 1-7.
         data.clear(); // resets the data
-
-        String[] row = new String[9];
 
         // Calculation area
 
         if(option.equals("A")){
-         do{
+            do{
             customerNum++;
-            System.out.println(customerNum);
-           
+            String[] row = new String[9];
+            
             // Per row calculations 
             if(customerNum == 1) {
                 Interarrival = 0;
@@ -38,17 +36,24 @@ public class simulation {
                 Interarrival = interArrivalTimeCompare();
 
                 arrival = Interarrival + Integer.valueOf(data.get(data.size() - 1)[2]);
-                idle = Integer.valueOf(data.get(data.size() - 1)[6]) - arrival;
+                
                 if (arrival < Integer.valueOf(data.get(data.size() - 1)[6])){
-                  serviceBegins = Integer.valueOf(data.get(data.size() - 1)[6]);
-              } else{ // add another else if, if other situation is not anticipated
-                  serviceBegins = Integer.valueOf(data.get(data.size() - 1)[2]); 
-              }
+                    serviceBegins = Integer.valueOf(data.get(data.size() - 1)[6]);
+                } else{ // add another else if, if other situation is not anticipated
+                    serviceBegins = arrival; 
+                }
+
+                if (arrival > Integer.valueOf(data.get(data.size() - 1)[6])){
+                    idle = arrival - Integer.valueOf(data.get(data.size() - 1)[6]);
+                } else {
+                    idle = 0;
+                }
 
             }
 
             service = serviceTimeCompare();
-           
+
+            
             waiting = serviceBegins - arrival;
             serviceEnds = service + serviceBegins;
             customerTime = serviceEnds - arrival;
@@ -67,12 +72,12 @@ public class simulation {
 
             
             data.add(row);
-         } while(customerNum != stoppingCriteria);
+            } while(customerNum != stoppingCriteria);
         } else {
-         do {
+            do {
 
             customerNum++;
-           
+            String[] row = new String[9];
             // Per row calculations 
             if(customerNum == 1) {
                 Interarrival = 0;
@@ -81,25 +86,30 @@ public class simulation {
                 Interarrival = interArrivalTimeCompare();
 
                 arrival = Interarrival + Integer.valueOf(data.get(data.size() - 1)[2]);
-                idle = Integer.valueOf(data.get(data.size() - 1)[6]) - arrival;
+                
                 if (arrival < Integer.valueOf(data.get(data.size() - 1)[6])){
-                  serviceBegins = Integer.valueOf(data.get(data.size() - 1)[6]);
-              } else{ // add another else if, if other situation is not anticipated
-                  serviceBegins = Integer.valueOf(data.get(data.size() - 1)[2]); 
-              }
+                    serviceBegins = Integer.valueOf(data.get(data.size() - 1)[6]);
+                } else{ // add another else if, if other situation is not anticipated
+                    serviceBegins = arrival; 
+                }
+
+                if (arrival > Integer.valueOf(data.get(data.size() - 1)[6])){
+                    idle = arrival - Integer.valueOf(data.get(data.size() - 1)[6]);
+                } else {
+                    idle = 0;
+                }
 
             }
 
             service = serviceTimeCompare();
-            // Service begins, Waiting time, Service Ends, Customer Time, Idle
-               //todo
-            
 
-           
+            // Service begins, Waiting time, Service Ends, Customer Time, Idle
+                //todo
+
             waiting = serviceBegins - arrival;
             serviceEnds = service + serviceBegins;
             customerTime = serviceEnds - arrival;
-           
+            
 
             // Setting of Values;
             row[0] = Integer.toString(customerNum);
@@ -112,16 +122,16 @@ public class simulation {
             row[7] = Integer.toString(customerTime);
             row[8] = Integer.toString(idle);
             data.add(row);
-         } while( serviceEnds < stoppingCriteria);
+            } while( serviceEnds < stoppingCriteria);
         }
 
         // Prints Table
         stringPrinter(data);
         averageValues[0] = sumThisValues(data, 5) / Integer.valueOf(data.get(data.size() - 1)[0]);
         for (String[] string : data) {
-         if(Integer.valueOf(string[5]) > 0) {
+            if(Integer.valueOf(string[5]) > 0) {
             counter++;
-         }
+            }
         }
 
         averageValues[1] = (counter / Integer.valueOf(data.get(data.size() - 1)[0])) * 100;
@@ -131,9 +141,7 @@ public class simulation {
         averageValues[5] = sumThisValues(data, 5) / counter;
         averageValues[6] = sumThisValues(data, 7) / Integer.valueOf(data.get(data.size() - 1)[0]);
         averagePrinter(averageValues);
-      
-    } while (createAnother());
-   }
+    }
 
      // Iterator. Sums up all the values in the given column
      private static Integer sumThisValues(ArrayList<String[]> data, int column) {
