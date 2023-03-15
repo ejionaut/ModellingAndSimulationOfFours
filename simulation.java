@@ -16,9 +16,8 @@ public class simulation {
 
    private static void calculate(int stoppingCriteria, String option){
         ArrayList<String[]> data = new ArrayList<String[]>(); // Stores per row
-        int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0, counter = 0; 
+        int customerNum = 0, Interarrival = 0, arrival = 0, service = 0, serviceBegins = 0, waiting = 0, serviceEnds = 0, customerTime = 0, idle = 0; 
         
-        int[] averageValues = new int[7]; // Stores the average value. Follow the arrangement on the specifications 1-7.
         data.clear(); // resets the data
 
         // Calculation area
