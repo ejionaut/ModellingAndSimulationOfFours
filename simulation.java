@@ -9,7 +9,7 @@ public class simulation {
    static Random rand = new Random();
    
    public static void main(String[] args) {
-       terminationOption();
+        terminationOption();
    }
 
    // Calculations
@@ -127,31 +127,19 @@ public class simulation {
 
         // Prints Table
         stringPrinter(data);
-        averageValues[0] = sumThisValues(data, 5) / Integer.valueOf(data.get(data.size() - 1)[0]);
-        for (String[] string : data) {
-            if(Integer.valueOf(string[5]) > 0) {
-            counter++;
-            }
+        averagePrinter(data);
+
+        
+
+        System.out.println("Do you want to run another simulation? (Yes/No)");
+        String answer = src.next();
+        if (answer.equalsIgnoreCase("Yes")) {
+           terminationOption();
+        } else {
+            System.out.println("Thank you for using Single Channel Queuing System Simulation!");
+            return;
         }
-
-        averageValues[1] = (counter / Integer.valueOf(data.get(data.size() - 1)[0])) * 100;
-        averageValues[2] = (sumThisValues(data, 8) / Integer.valueOf(data.get(data.size() - 1)[6])) * 100;
-        averageValues[3] = sumThisValues(data, 3) / sumThisValues(data, 0);
-        averageValues[4] = Integer.valueOf(data.get(data.size() - 1)[3]) / (Integer.valueOf(data.get(data.size() - 1)[0]) - 1);
-        averageValues[5] = sumThisValues(data, 5) / counter;
-        averageValues[6] = sumThisValues(data, 7) / Integer.valueOf(data.get(data.size() - 1)[0]);
-        averagePrinter(averageValues);
-    }
-
-     // Iterator. Sums up all the values in the given column
-     private static Integer sumThisValues(ArrayList<String[]> data, int column) {
-        int sum = 0;
-
-        for (String[] strings : data) {
-            sum += Integer.valueOf(strings[column]);
-        }
-        return sum;
-     }
+   }
 
      // Comparing Values
      private static Integer serviceTimeCompare(){
@@ -223,18 +211,6 @@ public class simulation {
        }
    }
 
-   private static Boolean createAnother(){
-    System.out.println("Do you want to create another simulation? ");
-    String choice = src.nextLine();
-
-    if ( choice.equals("yes") || choice.equals("YES") || choice.equals("Yes") || choice.equals("y") || choice.equals("Y")) {
-        terminationOption();
-    } else {
-        return false;
-    }
-    return null;
-   }
-
    // Printers
 
    private static void stringPrinter(ArrayList<String[]> data){
@@ -254,14 +230,14 @@ public class simulation {
     buffer();
    }
 
-   private static void averagePrinter(int[] data){
-    System.out.println("\nAverage Waiting time for customer : " + data[0] +
-                       "\nThe probability that a customer has to wait in the queue : " + data[1] +
-                       "\nThe proportion of idle time of the server : " + data[2] +
-                       "\nThe average service time : " + data[3] +
-                       "\nAverage time between arrivals : " + data[4] +
-                       "\nThe average waiting time for those who wait in queue : " + data[5] +
-                       "\nThe average time a customer spends in the system : " + data[6]);
+   private static void averagePrinter(ArrayList<String[]> data){
+    System.out.println("\nAverage Waiting time for customer : " + calculateAverageWaitingTime(data) + " mins" +
+                       "\nThe probability that a customer has to wait in the queue : " + calculateCustomersWithWaitTime(data) + " mins" +
+                       "\nThe proportion of idle time of the server : " + calculateProportionIdleTime(data) + " mins" +
+                       "\nThe average service time : " +  calculateAverageServiceTime(data) + " mins" +
+                       "\nAverage time between arrivals : " + calculateAverageTimeBetweenArrivals(data)  + " mins" + 
+                       "\nThe average waiting time for those who wait in queue : " + calculateTotalWaitingTimeWithQueue(data) + " mins" +
+                       "\nThe average time a customer spends in the system : " + calculateAverageTimeCustomerSpends(data) + " mins");
     buffer();
    }
 
@@ -271,4 +247,66 @@ public class simulation {
    }
 
 
+   private static double calculateAverageWaitingTime(ArrayList<String[]> data) {
+    int totalWaitingTime = 0;
+    for (String[] row : data) {
+        totalWaitingTime += Integer.parseInt(row[5]); // Waiting time is stored at index 5
+    }
+    return (double) totalWaitingTime / data.size();
+}
+
+private static double calculateCustomersWithWaitTime(ArrayList<String[]> data){
+    int customersWithWaitTime = 0;
+    for (String[] row : data) {
+        if (Integer.parseInt(row[5]) > 0) { // If waiting time is greater than 0, customer had to wait in the queue
+            customersWithWaitTime++;
+        }
+    }
+    
+    return (double) customersWithWaitTime / data.size();
+}
+
+private static double calculateProportionIdleTime(ArrayList<String[]> data){
+    int totalIdleTime = 0;
+    for (String[] row : data) {
+        totalIdleTime += Integer.parseInt(row[8]); // Idle time is stored at index 8
+    }
+    return (double) totalIdleTime / Integer.parseInt(data.get(data.size()-1)[6]);
+}
+
+private static double calculateAverageServiceTime(ArrayList<String[]> data){
+    int totalServiceTime = 0;
+    for (String[] row : data) {
+        totalServiceTime += Integer.parseInt(row[3]); // Service time is stored at index 3
+    }
+    return (double) totalServiceTime / data.size();
+}
+
+private static double calculateAverageTimeBetweenArrivals(ArrayList<String[]> data){
+    int totalInterarrivalTime = 0;
+    for (int i = 1; i < data.size(); i++) { // Interarrival time starts from the second row
+        totalInterarrivalTime += Integer.parseInt(data.get(i)[1]); // Interarrival time is stored at index 1
+    }
+    return (double) totalInterarrivalTime / (data.size()-1); // Number of interarrivals is one less than the number of customers
+}
+
+private static double calculateTotalWaitingTimeWithQueue(ArrayList<String[]> data){
+    int totalWaitingTimeWithQueue = 0;
+    int customersWithQueueWaitTime = 0;
+    for (String[] row : data) {
+        if (Integer.parseInt(row[5]) > 0) { // If waiting time is greater than 0, customer had to wait in the queue
+            totalWaitingTimeWithQueue += Integer.parseInt(row[5]); // Waiting time is stored at index 5
+            customersWithQueueWaitTime++;
+    }
+}
+    return (double) totalWaitingTimeWithQueue / customersWithQueueWaitTime;
+}
+
+private static double calculateAverageTimeCustomerSpends(ArrayList<String[]> data){
+    int totalTimeCustomerSpends = 0;
+    for (String[] row : data) {
+        totalTimeCustomerSpends += Integer.parseInt(row[7]); // Service time is stored at index 3
+    }
+    return (double) totalTimeCustomerSpends / data.size();
+}
 } // end of class
