@@ -226,7 +226,40 @@ public class simulation {
         System.out.printf("\n%6s %18s %18s %15s %18s %16s %18s %28s %26s",cN,iT,aT,sT,tSB,wT,tSE,tCSS,iTS);
     }
 
+    String[] sum = totalValues(data);
+
+    System.out.println();
+    System.out.printf("\n%6s %18s %18s %15s %18s %16s %18s %28s %26s",sum[0],sum[1],sum[2],sum[3],sum[4],sum[5],sum[6],sum[7],sum[8]);
+
     buffer();
+   }
+
+   private static String[] totalValues(ArrayList<String[]> data){
+    String[] finalValues = new String[9]; 
+    int iAT = 0, aT = 0, sT = 0, tSB = 0, wT = 0, tSE = 0, tcSS = 0, iT = 0;
+    finalValues[0] = "TOTAL";
+
+    for(String[] s : data){
+            iAT += Integer.valueOf(s[1]);
+            aT += Integer.valueOf(s[2]);
+            sT += Integer.valueOf(s[3]);
+            tSB += Integer.valueOf(s[4]);
+            wT += Integer.valueOf(s[5]);
+            tSE += Integer.valueOf(s[6]);
+            tcSS += Integer.valueOf(s[7]);
+            iT += Integer.valueOf(s[8]);
+    }
+
+    finalValues[1] = Integer.toString(iAT);
+    finalValues[2] = Integer.toString(aT);
+    finalValues[3] = Integer.toString(sT);
+    finalValues[4] = Integer.toString(tSB);
+    finalValues[5] = Integer.toString(wT);
+    finalValues[6] = Integer.toString(tSE);
+    finalValues[7] = Integer.toString(tcSS);
+    finalValues[8] = Integer.toString(iT);
+
+    return finalValues;
    }
 
    private static void averagePrinter(ArrayList<String[]> data){
