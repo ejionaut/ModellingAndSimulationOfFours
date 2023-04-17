@@ -265,11 +265,11 @@ public class simulation {
    private static void averagePrinter(ArrayList<String[]> data){
     System.out.println("\nAverage Waiting time for customer : " + calculateAverageWaitingTime(data) + " mins" +
                        "\nThe probability that a customer has to wait in the queue : " + calculateCustomersWithWaitTime(data) + " mins" +
-                       "\nThe proportion of idle time of the server : " + calculateProportionIdleTime(data) + " mins" +
-                       "\nThe average service time : " +  calculateAverageServiceTime(data) + " mins" +
-                       "\nAverage time between arrivals : " + calculateAverageTimeBetweenArrivals(data)  + " mins" + 
-                       "\nThe average waiting time for those who wait in queue : " + calculateTotalWaitingTimeWithQueue(data) + " mins" +
-                       "\nThe average time a customer spends in the system : " + calculateAverageTimeCustomerSpends(data) + " mins");
+                       "\nThe proportion of idle time of the server : " + String.format("%.2f",calculateProportionIdleTime(data)) + " mins" +
+                       "\nThe average service time : " +  String.format("%.2f",calculateAverageServiceTime(data)) + " mins" +
+                       "\nAverage time between arrivals : " + String.format("%.2f",calculateAverageTimeBetweenArrivals(data))  + " mins" + 
+                       "\nThe average waiting time for those who wait in queue : " + String.format("%.2f",calculateTotalWaitingTimeWithQueue(data)) + " mins" +
+                       "\nThe average time a customer spends in the system : " + String.format("%.2f",calculateAverageTimeCustomerSpends(data)) + " mins");
     buffer();
    }
 
